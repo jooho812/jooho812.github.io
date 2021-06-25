@@ -1,0 +1,11 @@
+jooho812 :
+  username: jooho812    # user name : martin
+  name: jooho812        # user full name : Martin Luther King
+  url_full:             # Homepage url
+  url:
+  bio: <a href="https://www.cloocus.com/">Cloud Navigator, Cloocus</a>
+  # 회사정보
+  picture: assets/images/jooho812.png   # author image
+  facebook:             # facebook ID
+  twitter:              # twitter ID
+  cover: False

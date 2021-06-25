@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
+  <link href="http://localhost:4000/author/jooho812/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2021-06-28T16:04:42+09:00</updated>
+  <id>http://localhost:4000/author/jooho812/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">IT Technical Training | </title>
+  
+
+  
+    <subtitle>IT기반기술교육 블로그</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Azure Database Service</title>
+      <link href="http://localhost:4000/Azure-database" rel="alternate" type="text/html" title="Azure Database Service" />
+      <published>2021-06-25T19:18:00+09:00</published>
+      <updated>2021-06-25T19:18:00+09:00</updated>
+      <id>http://localhost:4000/Azure-database</id>
+      <content type="html" xml:base="http://localhost:4000/Azure-database">&lt;p&gt;about azure&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>jooho812</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="azure" />
+      
+
+      
+        <summary type="html">about azure</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>
