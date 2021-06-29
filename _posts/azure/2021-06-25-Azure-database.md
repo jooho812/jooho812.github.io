@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: 'assets/images/bear.jpg'
+cover: 'assets/images/azure-azure-logo.png'
 navigation: true
 title: Azure Database Service
 date: 2021-06-25 10:18:00
