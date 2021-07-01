@@ -20,6 +20,10 @@
     <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
     <!-- highlight.js -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+    <!-- Web Font Setting -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+
     <style>.hljs { background: none; }</style>
 
     <!--[if IE]>
@@ -32,7 +36,7 @@
             }
         </style>
     <![endif]-->
-    
+
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="IT기반기술교육 블로그" />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.jpg" type="image/png" />
@@ -43,8 +47,7 @@
     <meta property="og:site_name" content="IT Technical Training" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Azure Database Service" />
-    <meta property="og:description" content="about azure
-" />
+    <meta property="og:description" content="Azure Database Service Azure 에서 제공하는 Database 관련 Service에 어떤 종류가 있고 해당 Service들에 대해 간단하게 정리해보자. RDBMS Azure MSSQL (Azure SQL, Azure Managed Instance) : 관리형 MSSQL Azure Database for Mysql : Mysql community version 데이터베이스 엔진을 기반으로 하는 Azure의 RDBMS Azure Database for MariaDB : MariaDB community version" />
     <meta property="og:url" content="http://localhost:4000/Azure-database" />
     <meta property="og:image" content="http://localhost:4000/assets/images/azure-azure-logo.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
@@ -54,8 +57,7 @@
     <meta property="article:tag" content="Azure" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Azure Database Service" />
-    <meta name="twitter:description" content="about azure
-" />
+    <meta name="twitter:description" content="Azure Database Service Azure 에서 제공하는 Database 관련 Service에 어떤 종류가 있고 해당 Service들에 대해 간단하게 정리해보자. RDBMS Azure MSSQL (Azure SQL, Azure Managed Instance) : 관리형 MSSQL Azure Database for Mysql : Mysql community version 데이터베이스 엔진을 기반으로 하는 Azure의 RDBMS Azure Database for MariaDB : MariaDB community version" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/azure-azure-logo.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -87,8 +89,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/Azure-database"
     },
-    "description": "about azure
-"
+    "description": "Azure Database Service Azure 에서 제공하는 Database 관련 Service에 어떤 종류가 있고 해당 Service들에 대해 간단하게 정리해보자. RDBMS Azure MSSQL (Azure SQL, Azure Managed Instance) : 관리형 MSSQL Azure Database for Mysql : Mysql community version 데이터베이스 엔진을 기반으로 하는 Azure의 RDBMS Azure Database for MariaDB : MariaDB community version"
 }
     </script>
 
@@ -176,7 +177,110 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>about azure</p>
+                    <h1 id="azure-database-service">Azure Database Service</h1>
+
+<hr />
+
+<p>Azure 에서 제공하는 Database 관련 Service에 어떤 종류가 있고 해당 Service들에 대해 간단하게 정리해보자.</p>
+
+<p><img src="/assets/images/azure-azure-service.PNG" alt="image" height="120%" width="120%" /></p>
+
+<h3 id="rdbms">RDBMS</h3>
+<ul>
+  <li><a href="/azure-sql">Azure MSSQL (Azure SQL, Azure Managed Instance)</a> : 관리형 MSSQL</li>
+  <li><a href="">Azure Database for Mysql</a> : Mysql community version 데이터베이스 엔진을 기반으로 하는 Azure의 RDBMS</li>
+  <li><a href="">Azure Database for MariaDB</a> : MariaDB community version 데이터베이스 엔진을 기반으로 하는 Azure의 RDBMS</li>
+  <li><a href="">Azure Database for PostgreSQL</a> : PostgreSQL community version 데이터베이스 엔진을 기반으로 하는 Azure의 RDBMS</li>
+</ul>
+
+<h3 id="nosql">NOSQL</h3>
+<ul>
+  <li><a href="">Azure Cosmos DB</a> : Azure의 완전관리형 NoSQL 데이터베이스(SQL, Cassandra, Gremlin, MongoDB, Table API 제공)</li>
+  <li><a href="">Azure Cache For Redis</a> : redis 기반 in-memory data store</li>
+</ul>
+
+<h3 id="dw">DW</h3>
+<ul>
+  <li><a href="">Azure Synapse Analytics</a> :</li>
+  <li></li>
+</ul>
+
+<h3 id="data-lake--analytics">Data lake &amp; Analytics</h3>
+<ul>
+  <li><a href="">Azure Data Lake Storage Gen2</a> :</li>
+  <li><a href="">Azure Databrics</a> :</li>
+  <li><a href="">Azure Data Explorer</a> :</li>
+</ul>
+
+<h1 id="header">HEADER</h1>
+
+<h2 id="header-1">HEADER</h2>
+
+<h3 id="header-2">HEADER</h3>
+
+<p>I just love <strong>bold text</strong>.</p>
+
+<p>This is really <strong><em>very</em></strong> very important text.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>First Header</th>
+      <th>Second Header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Content cell 1</td>
+      <td>Content cell 2</td>
+    </tr>
+    <tr>
+      <td>Content column 1</td>
+      <td>Content column 2</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />this is a complete item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />this is an incomplete item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />@mentions, #refs, <a href="">links</a>, <strong>formatting</strong>, and <del>tags</del> supported</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />list syntax required (any unordered or ordered list supported)</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>문단 중간에 <code class="language-plaintext highlighter-rouge">Code</code>를 넣을 수 있습니다.
+예를 들어 <code class="language-plaintext highlighter-rouge">printf("hello world!");</code> 이런 식으로 들어갑니다.</p>
+
+<p>As Grace Hopper said:</p>
+
+<blockquote>
+  <p>I’ve always been more interested.
+in the future than in the past.</p>
+</blockquote>
+
+<p>＼<em>literal asterisks＼</em>
+<em>literal asterisks</em>
+<strong>＼<em>＼</em>Text＼<em>＼</em></strong>
+_＼_Tom＼__</p>
+
+<p>GitHub supports emoji!
+:+1: :sparkles: :camel: :tada:
+:rocket: :metal: :octocat:</p>
+
+<hr />
+<hr />
+
+<p>작성 예시
+<a href="https://img.shields.io/badge/license-mit-green.svg&quot;">https://img.shields.io/badge/license-mit-green.svg"</a>
+https://img.shields.io/badge/–.svg</p>
+
+<p>APM: /apm/l/:packageName.svg
+AUR license: /aur/license/:packageName.svg</p>
 
                 </div>
             </section>
@@ -259,9 +363,131 @@ into the {body} of the default.hbs template -->
                 
                 
                 
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/built/images/blog-cover1.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; IT Technical Training &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/azure/">Azure</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/azure-sql">Azure SQL</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/azure/">
+                                
+                                    See all 1 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
             
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/azure-sql">
+                <div class="post-card-image" style="background-image: url(/assets/images/azure-azure-logo.png)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/azure-sql">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Azure</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Azure SQL</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>Azure MSSQL
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/jooho812.png" alt="jooho812" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jooho812/">jooho812</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
             
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
