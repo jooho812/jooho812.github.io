@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="http://localhost:4000/tag/azure/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2021-07-01T16:59:10+09:00</updated>
+  <updated>2021-07-06T11:15:12+09:00</updated>
   <id>http://localhost:4000/tag/azure/feed.xml</id>
 
   
@@ -52,7 +52,7 @@
 
 - IaaS VM에 SQL Server가 설치된 이미지 형태로 배포가 진행되는 `SQL Virtual Machine`
   
-MSSQL의 단위는 Instance 하위 N개의 Database로 구성되어 있는 형태입니다.
+MSSQL은 Instance 하위 N개의 Database로 구성되어 있는 형태입니다.
 
 - Database 단위로 배포되어 관리되는 `Azure SQL Database`
 - Instance 단위로 배포되어 관리되는 `Azure SQL Managed Instance` 이하 `Managed Instance`
@@ -89,17 +89,21 @@ DTU 단위가 개념은 이해가지만 현재 사용중인 spec 대비 어느�
 [Azure SQL DTU to vCore](https://docs.microsoft.com/ko-kr/azure/azure-sql/database/migrate-dtu-to-vcore) 에서 보면 DTU 모델에서 vCore 모델로 SKU를 변경할 때 참고하기 위한 정보를 제공합니다.
 이걸 역으로 계산하면 특정 vCore 수만큼의 performance 정도를 xDTU 에서 제공하는지 대략적으로 감을 잡을 수 있습니다.
 
-[DTU Calculator](https://dtucalculator.azurewebsites.net/) 를 제공하지만 사용하기가 번거롭기에 간단히 위와 같은 형태로 확인하는 방법도 있다 정도로 생각하면 될 것 같습니다.
+좀 더 정확히는 [DTU Calculator](https://dtucalculator.azurewebsites.net/) 를 통해 확인할 수 있습니다.
 
-### Resource Limit(vCore)
-&gt; 해당 리소스별로 제공되는 resource limit이나 형태가 다르다.
+### Resource Architecture
+&gt; 해당 리소스 계층별로 architecture가 상이합니다.
 
-Azure SQL Database(vCore)
+![azuresql-dtu-vs-vcore](/assets/images/azure-azuresql-04.PNG){: height=&quot;100%&quot; width=&quot;100%&quot;}
 
-계층 | 범용(General Purpose) | 중요 비즈니스(Business Critical) | Hyperscale
---- | --------------------- | ----------------------------- | ----------  
-대상 | 일반적인 용도 | 높은 IOPS 및 가용성 | 대용량 데이터베이스
-Compute | Gen5: vCore 2 ~ 80 (2.3 GHz) | Gen5: vCore 2 ~ 80 (2.3 GHz) | Gen5: vCore 2 ~ 80 (2.3 GHz)</content>
+Azure SQL은 기본 고가용성 위와 같은 아키텍처를 통해 제공합니다.
+
+계층    | [Basic, Standard &amp; General Purpose](https://docs.microsoft.com/ko-kr/azure/azure-sql/database/high-availability-sla#basic-standard-and-general-purpose-service-tier-locally-redundant-availability) | [Premium &amp; business Critical](https://docs.microsoft.com/ko-kr/azure/azure-sql/database/high-availability-sla#premium-and-business-critical-service-tier-locally-redundant-availability)
+:----- | :------------------------------------------------- | :----------------
+설명    | sqlservr.exe 프로세스가 실행되며 tempdb와 bufferpool 등 비교적 휘발되도 영향이 없는 부분인 ***compute layer***,&lt;br&gt; mdf, ldf 등의 데이터베이스 파일이 포함되며 해당 azure blob storage에는 기본 데이터 가용성 및 중복성을 제공하는 부분인 ***storage layer*** 두 계층으로 나뉩니다. | 해당 서비스 계층은 compute layer에서 연결되는 local ssd storage 형태로 AlwaysOn과 유사한 기술을 사용하여 구성되어 있으며&lt;br&gt; 2개의 secondary replica와 1개의 read only 형태의 replica를 제공합니다.  
+고가용성 | Engine이나 OS가 업그레이드되는 Planned maintenence나 &lt;br&gt;장애등으로 인한 중단시에 compute layer는 spare capacity에 있는 compute node를 통해&lt;br&gt; 콜드 캐시상태로 시작되는 형태로 고가용성을 제공합니다.  | semi replication 형태로 2개의 secondary replica 중 하나 이상의 secondary replica에 동기화되도록 유지하며 &lt;br&gt;failover 가 발생 할 경우 동기화된 replica로 endpoint가 변경되는 형태로 고가용성을 제공합니다. 
+
+각 계층별로 위와 같은 형태로의 기본 고가용성을 제공하기 때문에 client는 retry logic이 권고됩니다.</content>
 
       
       

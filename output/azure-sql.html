@@ -47,7 +47,7 @@
     <meta property="og:site_name" content="IT Technical Training" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Azure SQL" />
-    <meta property="og:description" content="Azure MSSQL SQL Virtual Machine, Azure SQL Database, Azure SQL Managed Instance Azure SQL 구분 Azure에서 제공하는 MSSQL 의 resource 형태가 다른 DBMS보다 다양하다보니 처음에 구분짓기가 어려울 수 있습니다. Azure SQL은 크게 3가지로 분류할 수 있습니다. IaaS VM에 SQL Server가 설치된 이미지 형태로 배포가 진행되는 SQL Virtual Machine MSSQL의 단위는" />
+    <meta property="og:description" content="Azure MSSQL SQL Virtual Machine, Azure SQL Database, Azure SQL Managed Instance Azure SQL 구분 Azure에서 제공하는 MSSQL 의 resource 형태가 다른 DBMS보다 다양하다보니 처음에 구분짓기가 어려울 수 있습니다. Azure SQL은 크게 3가지로 분류할 수 있습니다. IaaS VM에 SQL Server가 설치된 이미지 형태로 배포가 진행되는 SQL Virtual Machine MSSQL은 Instance" />
     <meta property="og:url" content="http://localhost:4000/azure-sql" />
     <meta property="og:image" content="http://localhost:4000/assets/images/azure-azure-logo.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
@@ -57,7 +57,7 @@
     <meta property="article:tag" content="Azure" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Azure SQL" />
-    <meta name="twitter:description" content="Azure MSSQL SQL Virtual Machine, Azure SQL Database, Azure SQL Managed Instance Azure SQL 구분 Azure에서 제공하는 MSSQL 의 resource 형태가 다른 DBMS보다 다양하다보니 처음에 구분짓기가 어려울 수 있습니다. Azure SQL은 크게 3가지로 분류할 수 있습니다. IaaS VM에 SQL Server가 설치된 이미지 형태로 배포가 진행되는 SQL Virtual Machine MSSQL의 단위는" />
+    <meta name="twitter:description" content="Azure MSSQL SQL Virtual Machine, Azure SQL Database, Azure SQL Managed Instance Azure SQL 구분 Azure에서 제공하는 MSSQL 의 resource 형태가 다른 DBMS보다 다양하다보니 처음에 구분짓기가 어려울 수 있습니다. Azure SQL은 크게 3가지로 분류할 수 있습니다. IaaS VM에 SQL Server가 설치된 이미지 형태로 배포가 진행되는 SQL Virtual Machine MSSQL은 Instance" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/azure-azure-logo.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -89,7 +89,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/azure-sql"
     },
-    "description": "Azure MSSQL SQL Virtual Machine, Azure SQL Database, Azure SQL Managed Instance Azure SQL 구분 Azure에서 제공하는 MSSQL 의 resource 형태가 다른 DBMS보다 다양하다보니 처음에 구분짓기가 어려울 수 있습니다. Azure SQL은 크게 3가지로 분류할 수 있습니다. IaaS VM에 SQL Server가 설치된 이미지 형태로 배포가 진행되는 SQL Virtual Machine MSSQL의 단위는"
+    "description": "Azure MSSQL SQL Virtual Machine, Azure SQL Database, Azure SQL Managed Instance Azure SQL 구분 Azure에서 제공하는 MSSQL 의 resource 형태가 다른 DBMS보다 다양하다보니 처음에 구분짓기가 어려울 수 있습니다. Azure SQL은 크게 3가지로 분류할 수 있습니다. IaaS VM에 SQL Server가 설치된 이미지 형태로 배포가 진행되는 SQL Virtual Machine MSSQL은 Instance"
 }
     </script>
 
@@ -196,7 +196,7 @@ Azure SQL은 크게 3가지로 분류할 수 있습니다.</p>
   <li>IaaS VM에 SQL Server가 설치된 이미지 형태로 배포가 진행되는 <code class="language-plaintext highlighter-rouge">SQL Virtual Machine</code></li>
 </ul>
 
-<p>MSSQL의 단위는 Instance 하위 N개의 Database로 구성되어 있는 형태입니다.</p>
+<p>MSSQL은 Instance 하위 N개의 Database로 구성되어 있는 형태입니다.</p>
 
 <ul>
   <li>Database 단위로 배포되어 관리되는 <code class="language-plaintext highlighter-rouge">Azure SQL Database</code></li>
@@ -239,39 +239,40 @@ Azure SQL은 크게 3가지로 분류할 수 있습니다.</p>
 <a href="https://docs.microsoft.com/ko-kr/azure/azure-sql/database/migrate-dtu-to-vcore">Azure SQL DTU to vCore</a> 에서 보면 DTU 모델에서 vCore 모델로 SKU를 변경할 때 참고하기 위한 정보를 제공합니다.
 이걸 역으로 계산하면 특정 vCore 수만큼의 performance 정도를 xDTU 에서 제공하는지 대략적으로 감을 잡을 수 있습니다.</p>
 
-<p><a href="https://dtucalculator.azurewebsites.net/">DTU Calculator</a> 를 제공하지만 사용하기가 번거롭기에 간단히 위와 같은 형태로 확인하는 방법도 있다 정도로 생각하면 될 것 같습니다.</p>
+<p>좀 더 정확히는 <a href="https://dtucalculator.azurewebsites.net/">DTU Calculator</a> 를 통해 확인할 수 있습니다.</p>
 
-<h3 id="resource-limitvcore">Resource Limit(vCore)</h3>
+<h3 id="resource-architecture">Resource Architecture</h3>
 <blockquote>
-  <p>해당 리소스별로 제공되는 resource limit이나 형태가 다르다.</p>
+  <p>해당 리소스 계층별로 architecture가 상이합니다.</p>
 </blockquote>
 
-<p>Azure SQL Database(vCore)</p>
+<p><img src="/assets/images/azure-azuresql-04.PNG" alt="azuresql-dtu-vs-vcore" height="100%" width="100%" /></p>
+
+<p>Azure SQL은 기본 고가용성 위와 같은 아키텍처를 통해 제공합니다.</p>
 
 <table>
   <thead>
     <tr>
-      <th>계층</th>
-      <th>범용(General Purpose)</th>
-      <th>중요 비즈니스(Business Critical)</th>
-      <th>Hyperscale</th>
+      <th style="text-align: left">계층</th>
+      <th style="text-align: left"><a href="https://docs.microsoft.com/ko-kr/azure/azure-sql/database/high-availability-sla#basic-standard-and-general-purpose-service-tier-locally-redundant-availability">Basic, Standard &amp; General Purpose</a></th>
+      <th style="text-align: left"><a href="https://docs.microsoft.com/ko-kr/azure/azure-sql/database/high-availability-sla#premium-and-business-critical-service-tier-locally-redundant-availability">Premium &amp; business Critical</a></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>대상</td>
-      <td>일반적인 용도</td>
-      <td>높은 IOPS 및 가용성</td>
-      <td>대용량 데이터베이스</td>
+      <td style="text-align: left">설명</td>
+      <td style="text-align: left">sqlservr.exe 프로세스가 실행되며 tempdb와 bufferpool 등 비교적 휘발되도 영향이 없는 부분인 <strong><em>compute layer</em></strong>,<br /> mdf, ldf 등의 데이터베이스 파일이 포함되며 해당 azure blob storage에는 기본 데이터 가용성 및 중복성을 제공하는 부분인 <strong><em>storage layer</em></strong> 두 계층으로 나뉩니다.</td>
+      <td style="text-align: left">해당 서비스 계층은 compute layer에서 연결되는 local ssd storage 형태로 AlwaysOn과 유사한 기술을 사용하여 구성되어 있으며<br /> 2개의 secondary replica와 1개의 read only 형태의 replica를 제공합니다.</td>
     </tr>
     <tr>
-      <td>Compute</td>
-      <td>Gen5: vCore 2 ~ 80 (2.3 GHz)</td>
-      <td>Gen5: vCore 2 ~ 80 (2.3 GHz)</td>
-      <td>Gen5: vCore 2 ~ 80 (2.3 GHz)</td>
+      <td style="text-align: left">고가용성</td>
+      <td style="text-align: left">Engine이나 OS가 업그레이드되는 Planned maintenence나 <br />장애등으로 인한 중단시에 compute layer는 spare capacity에 있는 compute node를 통해<br /> 콜드 캐시상태로 시작되는 형태로 고가용성을 제공합니다.</td>
+      <td style="text-align: left">semi replication 형태로 2개의 secondary replica 중 하나 이상의 secondary replica에 동기화되도록 유지하며 <br />failover 가 발생 할 경우 동기화된 replica로 endpoint가 변경되는 형태로 고가용성을 제공합니다.</td>
     </tr>
   </tbody>
 </table>
+
+<p>각 계층별로 위와 같은 형태로의 기본 고가용성을 제공하기 때문에 client는 retry logic이 권고됩니다.</p>
 
 
                 </div>
