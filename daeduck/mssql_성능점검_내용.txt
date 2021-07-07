@@ -1,0 +1,86 @@
+
+
+MSSQL 성능 튜닝 정리
+
+
+1. Window perfmon으로 성능모니터링 
+-> processor - %processor Time(total)
+-> Thread - %Processor Time, ID Thread
+
+성능 모니터에서 카운터 추가
+성능 개체 : Thread
+카운터 : % Processor Time / ID Thread 
+인스턴스 : sqlservr 리스트 전체 선택
+CPU 사용량이 높은 SQL 스레드 ID 확인 : 4280
+스레드 ID 로 spid 확인 
+   - CPU 사용량 많은 kpid 확인 후 SQL Server에서 sys.processes에 kpid 조회 -> spid 확인
+   
+첨부파일 : perfmon_session_qry.sql
+
+2. DMV 활용으로 CPU, IO, 실행시간등이 많은 프로시저 확인
+
+첨부파일 : DMV_check_qry.sql
+
+3. Xevent 활용
+   - 블로킹 쿼리 파악 및 개체 찾기(확인중)
+   - 데드락 쿼리 파악 및 개체 찾기(확인중)
+   https://www.sqlshack.com/monitoring-sql-server-deadlocks-using-the-system_health-extended-event/
+   - Xevent worker thread 수 확인   
+   https://www.sqlshack.com/max-worker-threads-for-sql-server-always-on-availability-group-databases/
+   
+첨부파일 : Xevent_system_health_record_check.sql
+
+4. 프로시저 recompile (기존 DB구조가 변경 되었을경우 프로시저 recompile을 통해 실행계획을 다시 설정하도록)
+https://docs.microsoft.com/en-us/sql/relational-databases/stored-procedures/recompile-a-stored-procedure
+
+5. 프로시저 및 SlowQuery 소스 확인 
+
+
+
+
+### checklist
+
+1. timeout 관련된 부분 어떤 로그가 찍히는지?
+
+2. 플랜캐시에 대한 확인.
+-- 단일 실행 계획이 전체 플랜캐시의 50%이상 사용할 경우 임시워크로드(ad-hoc workload) 옵션에 대한 최적화 사용을 검토해보는 것이 좋다. 
+/* ad-hoc : 비정형적인 Query 
+ * Prepared : Prepared statement
+ * Proc : Stored Procedure
+ * View : View
+ * Trigger : Trigger
+ */
+SELECT objtype AS [CacheType]
+, count_big(*) AS [Total Plans]
+, sum(cast(size_in_bytes as decimal(18,2)))/1024/1024 AS [Total MBs]
+--, avg(cast(usecounts as int)) AS [Avg Use Count]
+, sum(cast((CASE WHEN usecounts = 1 THEN size_in_bytes ELSE 0 END) as decimal(18,2)))/1024/1024 AS [Total MBs - USE Count 1]
+, sum(CASE WHEN usecounts = 1 THEN 1 ELSE 0 END) AS [Total Plans - USE Count 1]
+FROM sys.dm_exec_cached_plans
+GROUP BY objtype
+ORDER BY [Total MBs - USE Count 1] DESC
+
+3. configuration 
+remote query timeout(s) 현재 설정이 600(10분)으로 되어 있는데 분석용도로 원래 오래걸리는 쿼리라면 query timeout 설정을 늘리는 방안도 확인해 봐야 함.
+
+4. procedure 통계정보 check
+-- procedure 실행 통계(dmv)
+SELECT
+     CASE WHEN DATABASE_ID = 32767 THEN 'RESOURCE' ELSE DB_NAME(DATABASE_ID)END AS DBNAME
+    ,OBJECT_SCHEMA_NAME(OBJECT_ID,DATABASE_ID) AS [SCHEMA_NAME]
+    ,OBJECT_NAME(OBJECT_ID,DATABASE_ID)AS [OBJECT_NAME]
+    , st.text
+    ,CACHED_TIME
+    ,LAST_EXECUTION_TIME
+    ,EXECUTION_COUNT
+    ,TOTAL_WORKER_TIME / EXECUTION_COUNT AS AVG_CPU
+    ,TOTAL_ELAPSED_TIME / EXECUTION_COUNT AS AVG_ELAPSED
+    ,TOTAL_LOGICAL_READS
+    ,TOTAL_LOGICAL_READS / EXECUTION_COUNT AS AVG_LOGICAL_READS
+    ,TOTAL_LOGICAL_WRITES
+    ,TOTAL_LOGICAL_WRITES / EXECUTION_COUNT AS AVG_LOGICAL_WRITES
+    ,TOTAL_PHYSICAL_READS
+    ,TOTAL_PHYSICAL_READS / EXECUTION_COUNT AS AVG_PHYSICAL_READS
+FROM SYS.DM_EXEC_PROCEDURE_STATS
+CROSS APPLY sys.dm_exec_sql_text(plan_handle) AS st
+ORDER BY AVG_LOGICAL_READS DESC
