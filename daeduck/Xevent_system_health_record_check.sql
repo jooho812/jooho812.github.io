@@ -14,7 +14,7 @@ INNER JOIN sys.dm_xe_object_columns AS col2
 
 
 
--- system_health Xevent xel, xem ÆÄÀÏ¿¡¼­ wait_info ·¹ÄÚµå Á¶È¸
+-- system_health Xevent xel, xem íŒŒì¼ì—ì„œ wait_info ë ˆì½”ë“œ ì¡°íšŒ
 SELECT
     xed.event_data.value('(@timestamp)[1]', 'datetime2') AS [timestamp],
     xed.event_data.value('(data[@name="wait_type"]/text)[1]', 'varchar(25)') AS wait_type, 
@@ -30,8 +30,8 @@ WHERE fx.object_name = 'wait_info';
 
 
 
--- system_health Xevent xel, xem ÆÄÀÏ¿¡¼­ deadlock ·¹ÄÚµå Á¶È¸
--- Deadlock Report -> xml Å¬¸¯ ÈÄ xdl È®ÀåÀÚ·Î ÀúÀå ÈÄ ¿­±â
+-- system_health Xevent xel, xem íŒŒì¼ì—ì„œ deadlock ë ˆì½”ë“œ ì¡°íšŒ
+-- Deadlock Report -> xml í´ë¦­ í›„ xdl í™•ì¥ìë¡œ ì €ì¥ í›„ ì—´ê¸°
 SELECT
     xed.event_data.value('(@timestamp)[1]', 'datetime2') AS [timestamp],
     xed.event_data.value('(data[@name="wait_type"]/text)[1]', 'varchar(25)') AS wait_type, 
@@ -49,7 +49,7 @@ WHERE fx.object_name = 'xml_deadlock_report';
 
 
 
--- system_health Xevent xel, xem ÆÄÀÏ¿¡¼­ worker thread ·¹ÄÚµå Á¶È¸
+-- system_health Xevent xel, xem íŒŒì¼ì—ì„œ worker thread ë ˆì½”ë“œ ì¡°íšŒ
 with worker_thread_state
 as
 (
@@ -74,12 +74,23 @@ from worker_thread_state
 where component_name = 'QUERY_PROCESSING';
 
 /**
-Component_State : ÀÛ¾÷ÀÚ ½º·¹µå°¡ ¿Ç°Å³ª Ã¶ÀúÇÏ°Ô È°¿ë µÉ °ÍÀÌ¶ó´Â Á¤º¸¸¦ Á¦°øÇÕ´Ï´Ù.(warning À¸·Î µÇ¾îÀÖ´ÂÁö È®ÀÎ)
-MaxWorkers : ÃÖ´ë ÀÛ¾÷ÀÚ ½º·¹µå °ªÀº ¹®¼­ ½ÃÀÛ ºÎºĞ¿¡ Á¤ÀÇ µÈ ÇÁ·Î¼¼¼­ ¼ö¿¡ µû¶ó ´Ù¸¨´Ï´Ù. Á¦ ¿¹¿¡¼­´Â 8 °³ÀÇ ÇÁ·Î¼¼¼­°¡ ÀÖ½À´Ï´Ù. µû¶ó¼­ ÃÖ´ë ÀÛ¾÷ÀÚ ½º·¹µå 576 °³¸¦ Á¦°øÇÕ´Ï´Ù.
-Workercreated : ÀÌ ¼ıÀÚ´Â ÀÀ¿ë ÇÁ·Î±×·¥¿¡¼­ ¸¸µç ÀÛ¾÷ÀÚ ½º·¹µå¸¦ º¸¿©Áİ´Ï´Ù.
-oldestPendingTaskWaitingTime : º¸·ùÁßÀÎ ÀÛ¾÷ÀÌ ÀÖ°í ÀÛ¾÷ÀÚ ½º·¹µå¸¦ º¸À¯ÇÏ°íÀÖ´Â °æ¿ì °¡Àå ¿À·¡µÈ º¸·ù ÀÛ¾÷ ¼ö¸¦ Ç¥½ÃÇÕ´Ï´Ù. ÀÌ»óÀûÀ¸·Î´Â °ªÀÌ 0ÀÌ¾î¾ßÇÕ´Ï´Ù.
-º¸·ùÁßÀÎ ÀÛ¾÷ : ¶ÇÇÑ º¸·ùÁßÀÎ ÀÛ¾÷ ¼ö¸¦ Ç¥½ÃÇÏ¸ç Á¤»óÀûÀÎ È¯°æÀÇ °æ¿ì ÇØ´ç °ªµµ 0ÀÌ¾î¾ßÇÕ´Ï´Ù.
+Component_State : ì‘ì—…ì ìŠ¤ë ˆë“œê°€ ì˜³ê±°ë‚˜ ì² ì €í•˜ê²Œ í™œìš© ë  ê²ƒì´ë¼ëŠ” ì •ë³´ë¥¼ ì œê³µí•©ë‹ˆë‹¤.(warning ìœ¼ë¡œ ë˜ì–´ìˆëŠ”ì§€ í™•ì¸)
+MaxWorkers : ìµœëŒ€ ì‘ì—…ì ìŠ¤ë ˆë“œ ê°’ì€ ë¬¸ì„œ ì‹œì‘ ë¶€ë¶„ì— ì •ì˜ ëœ í”„ë¡œì„¸ì„œ ìˆ˜ì— ë”°ë¼ ë‹¤ë¦…ë‹ˆë‹¤. ì œ ì˜ˆì—ì„œëŠ” 8 ê°œì˜ í”„ë¡œì„¸ì„œê°€ ìˆìŠµë‹ˆë‹¤. ë”°ë¼ì„œ ìµœëŒ€ ì‘ì—…ì ìŠ¤ë ˆë“œ 576 ê°œë¥¼ ì œê³µí•©ë‹ˆë‹¤.
+Workercreated : ì´ ìˆ«ìëŠ” ì‘ìš© í”„ë¡œê·¸ë¨ì—ì„œ ë§Œë“  ì‘ì—…ì ìŠ¤ë ˆë“œë¥¼ ë³´ì—¬ì¤ë‹ˆë‹¤.
+oldestPendingTaskWaitingTime : ë³´ë¥˜ì¤‘ì¸ ì‘ì—…ì´ ìˆê³  ì‘ì—…ì ìŠ¤ë ˆë“œë¥¼ ë³´ìœ í•˜ê³ ìˆëŠ” ê²½ìš° ê°€ì¥ ì˜¤ë˜ëœ ë³´ë¥˜ ì‘ì—… ìˆ˜ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤. ì´ìƒì ìœ¼ë¡œëŠ” ê°’ì´ 0ì´ì–´ì•¼í•©ë‹ˆë‹¤.
+ë³´ë¥˜ì¤‘ì¸ ì‘ì—… : ë˜í•œ ë³´ë¥˜ì¤‘ì¸ ì‘ì—… ìˆ˜ë¥¼ í‘œì‹œí•˜ë©° ì •ìƒì ì¸ í™˜ê²½ì˜ ê²½ìš° í•´ë‹¹ ê°’ë„ 0ì´ì–´ì•¼í•©ë‹ˆë‹¤.
 **/
 
+
+
+ select OBJECT_NAME(s.object_id) AS object_name
+      , COL_NAME(sc.object_id, sc.column_id) AS column_name
+      , s.name AS statistics_name 
+      , h.* from sys.stats s
+ INNER JOIN sys.stats_columns AS sc  
+    ON s.stats_id = sc.stats_id AND s.object_id = sc.object_id  
+ cross apply sys.dm_db_stats_histogram(s.object_id,s.stats_id) h
+ where s.object_id = object_id('DD_IOT_COMMUNICATION')
+ order by s.object_id, s.name,sc.column_id
 
 
